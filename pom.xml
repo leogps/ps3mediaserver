@@ -848,6 +848,11 @@
 				</configuration>
 			</plugin>
 
+            <!--
+                #Run the following lines to install the libs in your local maven repo.
+                mvn install:install-file -Dfile="lib/cuelib-1.2.1-2008-06-13.jar" -DgroupId="jwbroek.cuelib" -DartifactId="cuelib" -Dversion="1.2.1-2008-06-13" -Dpackaging="jar"
+                mvn install:install-file -Dfile="lib/mediautil-1.0.jar" -DgroupId="mediautil" -DartifactId="mediautil" -Dversion="1.0" -Dpackaging="jar"
+            -->
 			<!--
 				This plugin will take care of installing the external dependencies that do not
 				exist in a public Maven repository. That is why we store some jar files in the
@@ -864,66 +869,66 @@
 
 				See: http://code.google.com/p/maven-external-dependency-plugin/issues/detail?id=8#c4
 			-->
-			<plugin>
-				<groupId>com.savage7.maven.plugins</groupId>
-				<artifactId>maven-external-dependency-plugin</artifactId>
-				<version>0.5</version>
-				<inherited>false</inherited>
-				<configuration>
-					<stagingDirectory>${project.build.directory}/dependencies/</stagingDirectory>
-					<createChecksum>true</createChecksum>
-					<skipChecksumVerification>false</skipChecksumVerification>
-					<force>false</force>
-					<artifactItems>
-						<artifactItem>
-							<groupId>jwbroek.cuelib</groupId>
-							<artifactId>cuelib</artifactId>
-							<version>${cuelib-version}</version>
-							<packaging>jar</packaging>
-							<downloadUrl>http://cuelib.googlecode.com/files/cuelib-${cuelib-version}.jar</downloadUrl>
-							<checksum>d03b6b960b3b83a2a419e8b5f07b6ba4bd18387b</checksum>
-						</artifactItem>
+			<!--<plugin>-->
+				<!--<groupId>com.savage7.maven.plugins</groupId>-->
+				<!--<artifactId>maven-external-dependency-plugin</artifactId>-->
+				<!--<version>0.5</version>-->
+				<!--<inherited>false</inherited>-->
+				<!--<configuration>-->
+					<!--<stagingDirectory>${project.build.directory}/dependencies/</stagingDirectory>-->
+					<!--<createChecksum>true</createChecksum>-->
+					<!--<skipChecksumVerification>false</skipChecksumVerification>-->
+					<!--<force>false</force>-->
+					<!--<artifactItems>-->
+						<!--<artifactItem>-->
+							<!--<groupId>jwbroek.cuelib</groupId>-->
+							<!--<artifactId>cuelib</artifactId>-->
+							<!--<version>${cuelib-version}</version>-->
+							<!--<packaging>jar</packaging>-->
+							<!--<downloadUrl>http://cuelib.googlecode.com/files/cuelib-${cuelib-version}.jar</downloadUrl>-->
+							<!--<checksum>d03b6b960b3b83a2a419e8b5f07b6ba4bd18387b</checksum>-->
+						<!--</artifactItem>-->
 
-						<artifactItem>
-							<groupId>mediautil</groupId>
-							<artifactId>mediautil</artifactId>
-							<version>${mediautil-version}</version>
-							<packaging>jar</packaging>
-							<install>true</install>
-							<force>false</force>
-							<downloadUrl>http://downloads.sourceforge.net/project/mediachest/MediaUtil/Version%201.0/mediautil-1.zip</downloadUrl>
-							<checksum>aa7ae51bb24a9268a8e57c6afe478c4293f84fda</checksum>
-							<extractFile>mediautil-${mediautil-version}/mediautil-${mediautil-version}.jar</extractFile>
-							<extractFileChecksum>e843cd55def75dce57123c79b7f36caca4841466</extractFileChecksum>
-						</artifactItem>
-					</artifactItems>
+						<!--<artifactItem>-->
+							<!--<groupId>mediautil</groupId>-->
+							<!--<artifactId>mediautil</artifactId>-->
+							<!--<version>${mediautil-version}</version>-->
+							<!--<packaging>jar</packaging>-->
+							<!--<install>true</install>-->
+							<!--<force>false</force>-->
+							<!--<downloadUrl>http://downloads.sourceforge.net/project/mediachest/MediaUtil/Version%201.0/mediautil-1.zip</downloadUrl>-->
+							<!--<checksum>aa7ae51bb24a9268a8e57c6afe478c4293f84fda</checksum>-->
+							<!--<extractFile>mediautil-${mediautil-version}/mediautil-${mediautil-version}.jar</extractFile>-->
+							<!--<extractFileChecksum>e843cd55def75dce57123c79b7f36caca4841466</extractFileChecksum>-->
+						<!--</artifactItem>-->
+					<!--</artifactItems>-->
 
-				</configuration>
+				<!--</configuration>-->
 
-				<executions>
-					<execution>
-						<id>clean-external-dependencies</id>
-						<phase>clean</phase>
-						<goals>
-							<!-- mvn com.savage7.maven.plugins:maven-external-dependency-plugin:clean-external -->
-							<goal>clean-external</goal>
-						</goals>
-					</execution>
+				<!--<executions>-->
+					<!--<execution>-->
+						<!--<id>clean-external-dependencies</id>-->
+						<!--<phase>clean</phase>-->
+						<!--<goals>-->
+							<!--&lt;!&ndash; mvn com.savage7.maven.plugins:maven-external-dependency-plugin:clean-external &ndash;&gt;-->
+							<!--<goal>clean-external</goal>-->
+						<!--</goals>-->
+					<!--</execution>-->
 
-					<execution>
-						<id>resolve-install-external-dependencies</id>
-						<!-- Note: this phase works in Maven 2. In Maven 3, it needs to be triggered manually. See above -->
-						<phase>validate</phase>
-						<goals>
-							<!-- mvn com.savage7.maven.plugins:maven-external-dependency-plugin:resolve-external -->
-							<goal>resolve-external</goal>
+					<!--<execution>-->
+						<!--<id>resolve-install-external-dependencies</id>-->
+						<!--&lt;!&ndash; Note: this phase works in Maven 2. In Maven 3, it needs to be triggered manually. See above &ndash;&gt;-->
+						<!--<phase>validate</phase>-->
+						<!--<goals>-->
+							<!--&lt;!&ndash; mvn com.savage7.maven.plugins:maven-external-dependency-plugin:resolve-external &ndash;&gt;-->
+							<!--<goal>resolve-external</goal>-->
 
-							<!-- mvn com.savage7.maven.plugins:maven-external-dependency-plugin:install-external -->
-							<goal>install-external</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+							<!--&lt;!&ndash; mvn com.savage7.maven.plugins:maven-external-dependency-plugin:install-external &ndash;&gt;-->
+							<!--<goal>install-external</goal>-->
+						<!--</goals>-->
+					<!--</execution>-->
+				<!--</executions>-->
+			<!--</plugin>-->
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

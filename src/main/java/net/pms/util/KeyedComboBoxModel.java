@@ -45,6 +45,7 @@ import javax.swing.*;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * The KeyedComboBox model allows to define an internal key (the data element)
@@ -185,12 +186,14 @@ public class KeyedComboBoxModel implements ComboBoxModel {
 		if (tempListeners == null) {
 			tempListeners = listdatalistener.toArray(new ListDataListener[listdatalistener.size()]);
 		}
-		for (int i = 0; i < tempListeners.length; i++) {
-			final ListDataListener l = tempListeners[i];
+		ListDataListener[] copyOfTempListeners = Arrays.copyOf(tempListeners, tempListeners.length);
+		for (int i = 0; i < copyOfTempListeners.length; i++) {
+			final ListDataListener l = copyOfTempListeners[i];
 			if (l != null && evt != null) {
 				l.contentsChanged(evt);
 			}
 		}
+
 	}
 
 	/**
@@ -338,7 +341,7 @@ public class KeyedComboBoxModel implements ComboBoxModel {
 	 *
 	 * @param l the <code>ListDataListener</code> to be removed
 	 */
-	public void removeListDataListener(final ListDataListener l) {
+	public synchronized void removeListDataListener(final ListDataListener l) {
 		listdatalistener.remove(l);
 		tempListeners = null;
 	}
