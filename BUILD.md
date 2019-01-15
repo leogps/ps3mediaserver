@@ -159,8 +159,10 @@ Nothing to do.
 
 These are needed by the build process:
 
-    mvn com.savage7.maven.plugins:maven-external-dependency-plugin:resolve-external
-    mvn com.savage7.maven.plugins:maven-external-dependency-plugin:install-external
+    #mvn com.savage7.maven.plugins:maven-external-dependency-plugin:resolve-external
+    #mvn com.savage7.maven.plugins:maven-external-dependency-plugin:install-external
+    mvn install:install-file -Dfile="lib/cuelib-1.2.1-2008-06-13.jar" -DgroupId="jwbroek.cuelib" -DartifactId="cuelib" -Dversion="1.2.1-2008-06-13" -Dpackaging="jar"
+    mvn install:install-file -Dfile="lib/mediautil-1.0.jar" -DgroupId="mediautil" -DartifactId="mediautil" -Dversion="1.0" -Dpackaging="jar"
 
 At this point all required software packages are present.
 PMS is now ready to be built.
